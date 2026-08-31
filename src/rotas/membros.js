@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
     membros[proximoId] = novomembro
     proximoId++
   }
-res.status(200).json({erro:"membro adicionado"})
+res.status(201).json({erro:"membro adicionado"})
 
 });
 
