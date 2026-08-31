@@ -17,16 +17,25 @@ router.get("/", (req, res) => {
 
 
 router.post("/", (req, res) => {
+  const novomembro = req.body;
 
-  const novomembro = req.body
-  if((novomembro && novomembro.nome) || (novomembro && novomembro.matricula)){
-    res.status(400).json({erro:"matricula ou nome vazio"})
-  } else {
-    membros[proximoId] = novomembro
-    proximoId++
+  if (!novomembro || !novomembro.nome || !novomembro.matricula) {
+    return res.status(400).json({ erro: "matricula ou nome vazio" });
   }
-res.status(201).json(membro)
 
+  const membro = {
+    id: proximoId,
+    nome: novomembro.nome,
+    matricula: novomembro.matricula
+  };
+
+  membros.push(membro);
+  proximoId++;
+
+  return res.status(201).json({
+    erro: "membro adicionado"
+  });
 });
+
 
 module.exports = router;
