@@ -17,9 +17,9 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   // TODO (Tarefa A):
   //  1. Leia titulo (texto) e autor (texto) de req.body.
-  const { titulo, autor } = req.bory;
+  const { titulo, autor } = req.body;
   //  2. Se faltar titulo OU autor, responda 400.
-  if (!titulo || autor) {
+  if (!titulo || !autor) {
     return res.status(400).json({erro: "titulo e autor são obrigatórios"});
   }
   //  3. Crie { id: proximoId++, titulo, autor }, adicione em `livros`
@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
   };
   livros.push(livro);
   
-  res.status(201).json({ erro: "não implementado" });
+  res.status(201).json(livro);
 });
 
 module.exports = router;
